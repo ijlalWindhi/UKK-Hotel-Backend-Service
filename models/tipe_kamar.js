@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       });
       tipe_kamar.hasMany(models.pemesanan, {
         foreignKey: "id_tipe_kamar",
+        as: "pemesanan",
       });
     }
   }

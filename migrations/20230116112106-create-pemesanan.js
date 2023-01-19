@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER(11),
       },
       nomor_pemesanan: {
-        type: Sequelize.INTEGER(10),
+        type: Sequelize.STRING(50),
       },
       nama_pemesan: {
         type: Sequelize.STRING(100),

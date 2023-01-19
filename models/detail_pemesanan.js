@@ -11,15 +11,21 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       detail_pemesanan.belongsTo(models.pemesanan, {
         foreignKey: "id_pemesanan",
+        as: "pemesanan",
       });
       detail_pemesanan.belongsTo(models.kamar, {
         foreignKey: "id_kamar",
+        as: "kamar",
       });
     }
   }
   detail_pemesanan.init(
     {
-      id_detail_pemesanan: DataTypes.INTEGER,
+      id_detail_pemesanan: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
       id_pemesanan: DataTypes.INTEGER,
       id_kamar: DataTypes.INTEGER,
       tgl_akses: DataTypes.DATE,

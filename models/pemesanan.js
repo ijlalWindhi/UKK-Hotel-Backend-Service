@@ -11,19 +11,26 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       pemesanan.belongsTo(models.user, {
         foreignKey: "id_user",
+        as: "user",
       });
       pemesanan.belongsTo(models.tipe_kamar, {
         foreignKey: "id_tipe_kamar",
+        as: "tipe_kamar",
       });
       pemesanan.hasMany(models.detail_pemesanan, {
         foreignKey: "id_pemesanan",
+        as: "detail_pemesanan",
       });
     }
   }
   pemesanan.init(
     {
-      id_pemesanan: DataTypes.INTEGER,
-      nomor_pemesanan: DataTypes.INTEGER,
+      id_pemesanan: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      nomor_pemesanan: DataTypes.STRING,
       nama_pemesan: DataTypes.STRING,
       email_pemesan: DataTypes.STRING,
       tgl_pemesanan: DataTypes.DATE,
@@ -39,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       modelName: "pemesanan",
       tableName: "pemesanan",
-      timestamps: true,
+      timestamps: false,
     }
   );
   return pemesanan;

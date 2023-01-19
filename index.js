@@ -23,6 +23,10 @@ app.use("/tipe_kamar", tipe_kamar);
 const kamar = require("./routes/kamar");
 app.use("/kamar", kamar);
 
+// endpoint pemesanan
+const pemesanan = require("./routes/pemesanan");
+app.use("/pemesanan", pemesanan);
+
 //run server
 app.listen(PORT, () => {
   console.log("server run on port " + PORT);
