@@ -150,7 +150,7 @@ app.delete("/delete/:id_user", auth, async (req, res) => {
   const param = { id_user: req.params.id_user };
   // delete old file
   user.findOne({ where: param }).then((result) => {
-    let oldFileName = result.dataValues.foto;
+    let oldFileName = result.foto;
     // delete old file
     let dir = path.join(__dirname, "../public/images/user/", oldFileName);
     fs.unlink(dir, (err) => err);

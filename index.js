@@ -15,6 +15,10 @@ app.use(express.static(path.join(__dirname, "public")));
 const user = require("./routes/user");
 app.use("/user", user);
 
+// endpoint tipe_kamar
+const tipe_kamar = require("./routes/tipe_kamar");
+app.use("/tipe_kamar", tipe_kamar);
+
 //run server
 app.listen(PORT, () => {
   console.log("server run on port " + PORT);
