@@ -19,6 +19,10 @@ app.use("/user", user);
 const tipe_kamar = require("./routes/tipe_kamar");
 app.use("/tipe_kamar", tipe_kamar);
 
+// endpoint kamar
+const kamar = require("./routes/kamar");
+app.use("/kamar", kamar);
+
 //run server
 app.listen(PORT, () => {
   console.log("server run on port " + PORT);

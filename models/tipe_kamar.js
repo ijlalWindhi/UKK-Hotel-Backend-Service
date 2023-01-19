@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       tipe_kamar.hasMany(models.kamar, {
         foreignKey: "id_tipe_kamar",
+        as: "kamar",
       });
       tipe_kamar.hasMany(models.pemesanan, {
         foreignKey: "id_tipe_kamar",

@@ -11,12 +11,17 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       kamar.belongsTo(models.tipe_kamar, {
         foreignKey: "id_tipe_kamar",
+        as: "tipe_kamar",
       });
     }
   }
   kamar.init(
     {
-      id_kamar: DataTypes.INTEGER,
+      id_kamar: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
       nomor_kamar: DataTypes.INTEGER,
       id_tipe_kamar: DataTypes.INTEGER,
     },
