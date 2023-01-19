@@ -209,19 +209,23 @@ app.patch(
 );
 
 // search tipe_kamar
-app.get("/search/:nama_user", auth, async (req, res) => {
+app.get("/search/:nama_tipe_kamar", auth, async (req, res) => {
   tipe_kamar
     .findAll({
       where: {
         [Op.or]: [
-          { nama_user: { [Op.like]: "%" + req.params.nama_user + "%" } },
+          {
+            nama_tipe_kamar: {
+              [Op.like]: "%" + req.params.nama_tipe_kamar + "%",
+            },
+          },
         ],
       },
     })
     .then((result) => {
       res.status(200).json({
         status: "success",
-        message: "user has been found",
+        message: "result of " + req.params.nama_tipe_kamar + "",
         data: result,
       });
     })
