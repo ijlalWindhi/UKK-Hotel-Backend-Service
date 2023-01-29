@@ -140,39 +140,62 @@ app.patch("/edit/:id_kamar", auth, async (req, res) => {
     nomor_kamar: req.body.nomor_kamar,
     id_tipe_kamar: req.body.id_tipe_kamar,
   };
+  console.log(data);
 
   kamar.findOne({ where: param }).then((result) => {
     if (result) {
-      kamar
-        .findOne({ where: { nomor_kamar: data.nomor_kamar } })
-        .then((result) => {
-          if (result) {
+      if (data.nomor_kamar != null) {
+        kamar
+          .findOne({ where: { nomor_kamar: data.nomor_kamar } })
+          .then((result) => {
+            if (result) {
+              res.status(400).json({
+                status: "error",
+                message: "nomor kamar already exist",
+              });
+            } else {
+              kamar
+                .update(data, { where: param })
+                .then((result) => {
+                  res.status(200).json({
+                    status: "success",
+                    message: "data has been updated",
+                    data: {
+                      id_kamar: param.id_kamar,
+                      nomor_kamar: data.nomor_kamar,
+                      id_tipe_kamar: data.id_tipe_kamar,
+                    },
+                  });
+                })
+                .catch((error) => {
+                  res.status(400).json({
+                    status: "error",
+                    message: error.message,
+                  });
+                });
+            }
+          });
+      } else {
+        kamar
+          .update(data, { where: param })
+          .then((result) => {
+            res.status(200).json({
+              status: "success",
+              message: "data has been updated",
+              data: {
+                id_kamar: param.id_kamar,
+                nomor_kamar: data.nomor_kamar,
+                id_tipe_kamar: data.id_tipe_kamar,
+              },
+            });
+          })
+          .catch((error) => {
             res.status(400).json({
               status: "error",
-              message: "nomor kamar already exist",
+              message: error.message,
             });
-          } else {
-            kamar
-              .update(data, { where: param })
-              .then((result) => {
-                res.status(200).json({
-                  status: "success",
-                  message: "data has been updated",
-                  data: {
-                    id_kamar: param.id_kamar,
-                    nomor_kamar: data.nomor_kamar,
-                    id_tipe_kamar: data.id_tipe_kamar,
-                  },
-                });
-              })
-              .catch((error) => {
-                res.status(400).json({
-                  status: "error",
-                  message: error.message,
-                });
-              });
-          }
-        });
+          });
+      }
     } else {
       res.status(404).json({
         status: "error",
@@ -195,6 +218,12 @@ app.get("/search/:nomor_kamar", auth, async (req, res) => {
           },
         ],
       },
+      include: [
+        {
+          model: model.tipe_kamar,
+          as: "tipe_kamar",
+        },
+      ],
     })
     .then((result) => {
       res.status(200).json({
