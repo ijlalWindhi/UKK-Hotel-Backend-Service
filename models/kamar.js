@@ -24,6 +24,8 @@ module.exports = (sequelize, DataTypes) => {
       },
       nomor_kamar: DataTypes.INTEGER,
       id_tipe_kamar: DataTypes.INTEGER,
+      check_in: DataTypes.DATE,
+      check_out: DataTypes.DATE,
     },
     {
       sequelize,

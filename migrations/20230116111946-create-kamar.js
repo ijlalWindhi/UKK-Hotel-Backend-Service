@@ -18,6 +18,12 @@ module.exports = {
           key: "id_tipe_kamar",
         },
       },
+      check_in: {
+        type: Sequelize.DATE,
+      },
+      check_out: {
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
